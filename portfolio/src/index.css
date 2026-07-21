@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Light Mode (Warm Sand & Cream Aesthetic) ─────────────────── */
+  :root {
+    --color-base: 247 243 238;          /* Light Warm Sand Background (#f7f3ee) */
+    --color-surface: 255 255 255;       /* Crisp White Card Background */
+    --color-surface-raised: 238 231 222;/* Soft Cream Raised Surface */
+    --color-surface-hover: 230 221 210; /* Hover Warm Sand */
+    --color-line: 226 216 203;          /* Warm Subtle Border */
+    --color-line-strong: 195 180 162;   /* Focused Border */
+    
+    --color-ink: 42 32 26;              /* Dark Brown Primary Text (#2a201a) */
+    --color-ink-dim: 85 68 57;          /* Medium Warm Brown Text */
+    --color-ink-faint: 140 118 102;     /* Muted Caramel Subtitles */
+    
+    --color-silver: 196 112 50;         /* Warm Amber / Copper Accent (#c47032) */
+    --color-signal: 58 135 98;          /* Soft Emerald Indicator */
+  }
+
+  /* ── Dark Mode (Rich Chocolate Espresso & Beige) ─────────────── */
+  .dark {
+    --color-base: 24 19 16;             /* Deep Chocolate Background (#181310) */
+    --color-surface: 36 29 25;          /* Rich Dark Brown Card (#241d19) */
+    --color-surface-raised: 48 39 34;    /* Lighter Roasted Coffee Tone */
+    --color-surface-hover: 59 48 42;     /* Card Hover Accent */
+    --color-line: 54 44 38;             /* Dark Subtle Border */
+    --color-line-strong: 82 67 58;     /* Focused Border Tone */
+    
+    --color-ink: 245 237 227;           /* Warm Sand Cream Primary Text (#f5ede3) */
+    --color-ink-dim: 217 203 189;       /* Soft Beige Secondary Text */
+    --color-ink-faint: 166 150 137;     /* Muted Subtitles */
+    
+    --color-silver: 217 140 78;         /* Amber Gold Accent (#d98c4e) */
+    --color-signal: 74 158 116;         /* Emerald Indicator */
+  }
+
+  * {
+    @apply border-line;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-base text-ink transition-colors duration-300;
+    background-image:
+      radial-gradient(circle at 10% 0%, rgb(var(--color-silver) / 0.1), transparent 35%),
+      radial-gradient(circle at 90% 25%, rgb(var(--color-ink) / 0.03), transparent 40%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background: rgb(var(--color-silver) / 0.3);
+    color: rgb(var(--color-ink));
+  }
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid rgb(var(--color-silver));
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--color-base));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-line-strong));
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-silver));
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-surface border border-line rounded-2xl shadow-xl transition-all duration-300;
+    backdrop-filter: blur(8px);
+  }
+  .panel:hover {
+    border-color: rgb(var(--color-line-strong));
+  }
+  .eyebrow {
+    @apply font-mono text-[11px] tracking-[0.2em] uppercase text-ink-faint font-semibold;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl text-base font-semibold px-6 py-2.5 text-sm transition-all duration-200 active:scale-[0.98];
+    background: linear-gradient(135deg, rgb(var(--color-silver)) 0%, #b86d3b 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgb(217 140 78 / 0.25);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgb(217 140 78 / 0.4);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line text-ink font-medium px-5 py-2.5 text-sm transition-all duration-200 hover:bg-surface-hover hover:border-silver active:scale-[0.98];
+  }
+  .nav-link {
+    @apply flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-ink-faint transition-all hover:bg-surface-hover hover:text-ink;
+  }
+  .nav-link-active {
+    @apply bg-surface-hover text-ink font-semibold;
+    border-left: 3px solid rgb(var(--color-silver));
+  }
+  .tag {
+    @apply font-mono text-[11px] tracking-wide uppercase rounded-lg border border-line px-3 py-1 text-ink-dim font-medium;
+    background-color: rgb(var(--color-surface-raised) / 0.6);
+  }
+}
